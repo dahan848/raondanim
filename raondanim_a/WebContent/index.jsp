@@ -4,4 +4,5 @@
 	location.href="statics/home";
 	
 	///dfdsfsdfasdfasdfasdf
+	/////
 </script>
