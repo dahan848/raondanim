@@ -2,4 +2,6 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
 	location.href="statics/home";
+	
+	///dfdsfsdfasdfasdfasdf
 </script>
