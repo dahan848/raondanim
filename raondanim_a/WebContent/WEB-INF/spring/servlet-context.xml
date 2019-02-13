@@ -8,10 +8,16 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<context:component-scan
 		base-package="statics.controller" />
+	<context:component-scan base-package="trip.controller"></context:component-scan>
+	
+	
 	<!-- 파일 첨부 시, 요청에 포함되어있는 multipart를 처리해주는 Resolver -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</bean>
+	
+	
+	
 	<mvc:annotation-driven></mvc:annotation-driven>
 
 	<mvc:resources location="/WEB-INF/resources/css/"
