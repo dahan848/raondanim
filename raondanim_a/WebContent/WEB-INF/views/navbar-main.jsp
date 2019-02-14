@@ -1,8 +1,10 @@
 <!-- Header -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- contextPath 설정 -->
+<!-- 태그 라이브러리 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!-- contextPath 설정 -->
 <%	request.setAttribute("contextPath", request.getContextPath()); %>	
 <!-- 부트스트랩 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,24 +22,35 @@
 <header>
 	<nav class="navbar navbar-default">
     	<div class="container">
-        	<div class="navbar-header">
-	            <button type="button" id="navbar-mobile" class="navbar-left navbar-toggle collapsed">
-	                <span class="sr-only">Toggle navigation</span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	            </button>
-	                <span class="nav-tooltip">Login or Join</span>
-	           			<a class="navbar-brand hidden-xs" href="${contextPath}/statics/home">
-	                		<img src="${contextPath}/img/logo-raon.png">
-	            		</a>
+        	<div class="navbar-header" style="width: 875px;">
+       			<a class="navbar-brand hidden-xs" href="${contextPath}/statics/home">
+            		<img src="${contextPath}/img/logo-raon.png">
+        		</a>
+		        <!-- 로그인 상태에서 출력 되는 회원 정보  -->
+		        <sec:authorize access="isAuthenticated()">
+	        	<div class="profile-summary">
+	                   <a href="#">
+	                       <img src="${contextPath}/img/profile_2.jpg">
+	                   </a>
+	                   <a href="#">
+	                 		      사용자이름
+	                       <strong class="text-potluck">(숙박포인트)</strong>
+	                   </a>
+	             </div>
+	             </sec:authorize>
 	        </div>
-	        <!-- 로그인 유/무에 따른 설정 정의 하어야함 -->
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	            <ul class="nav navbar-nav navbar-right">
-                	<li><a href="${contextPath}/statics/login">로그인</a></li>
-					<li><span class="vertical-separator"></span><a
-	                            href="${contextPath}/statics/join">회원가입</a></li>
+	           		<sec:authorize access="isAnonymous()"> <!-- 로그인 상태 X -->
+                	<li><a href="${contextPath}/statics/loginForm">로그인</a></li>
+					<li><span class="vertical-separator"></span><a href="${contextPath}/statics/join">회원가입</a></li>
+					<li><span class="vertical-separator"></span><a href="${contextPath}/statics/join"><i class="fa fa-info-circle fa-lg"></i></a></li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()"> <!-- 로그인 상태 O -->
+						<li><span class="vertical-separator"></span><a href="${contextPath}/statics/join"><i class="fa fa-envelope fa-lg"></i></a></li>
+						<li><span class="vertical-separator"></span><a href="${contextPath}/statics/join"><i class="fa fa-info-circle fa-lg"></i></a></li>
+						<li><span class="vertical-separator"></span><a href="${contextPath}/statics/logout">로그아웃</a></li>
+					</sec:authorize>
 	                <li class="dropdown">
 	                	<span class="vertical-separator"></span>
 	                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

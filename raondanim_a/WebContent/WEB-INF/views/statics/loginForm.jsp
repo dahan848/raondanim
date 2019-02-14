@@ -17,11 +17,24 @@
         <div class="container">
             <div class="form-block">
                 <img src="${contextPath}/img/logo-raon.png" alt="">
-                <form method="post">
-                    <div class="form-group"><label class="sr-only control-label" for="id_login">이메일</label><input autofocus="autofocus" class="form-control" id="id_login" name="login" placeholder="이메일 주소" title="" type="email" required /></div>
-                    <div class="form-group"><label class="sr-only control-label" for="id_password">비밀번호</label><input class="form-control" id="id_password" name="password" placeholder="비밀번호" title="" type="password" required /></div>
-                    <div class="form-group"><div class="checkbox"><label for="id_remember"><input class="" id="id_remember" name="remember" type="checkbox" /> 자동 로그인</label></div></div>
-                    <button class="btn btn-potluck btn-block">로그인</button>
+                <form action="login" method="post"> <!-- 로그인 폼  -->
+                	<!-- 시큐리티 사용하기 위한 파라미터 (토큰) -->
+                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <div class="form-group">
+                    	<label class="sr-only control-label" for="id_login">이메일</label>
+                    		<input autofocus="autofocus" class="form-control" id="id_login" name="user_id" placeholder="이메일 주소" title="" type="email" required />
+               		</div>
+                    <div class="form-group"><label class="sr-only control-label" for="id_password">비밀번호</label>
+                    	<input class="form-control" id="id_password" name="user_pw" placeholder="비밀번호" title="" type="password" required />
+                   	</div>
+                    <div class="form-group">
+                    	<div class="checkbox">
+                    		<label for="id_remember">
+                    			<input class="" id="id_remember" name="remember" type="checkbox" /> 자동 로그인
+                   			</label>
+               			</div>
+           			</div>
+                    <button class="btn btn-potluck btn-block" type="submit">로그인</button>
 					<a href="#" class="btn btn-block btn-social btn-kakao">
 					  <span class="fa fa-kakao" style="width: 32px;"></span>
 					 		 <span style="display: inline-block; text-align: center; width: 250px;">카카오톡 로그인</span>
