@@ -73,40 +73,40 @@ th {
 			<table class="table" id="ta">
 
 				<tr>
-					<th style="padding: 20px;">제목</th>
+					<th style="padding: 20px;" class="success">제목</th>
 					<td style="padding: 20px;">
 						<input type="text" id="trip_Board_Title" name="trip_Board_Title" class="form-control" style=" width: 300px;">
 					</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">나의 관심사</th>
+					<th style="padding: 20px;" class="warning">나의 관심사</th>
 					<td style="padding: 20px;">Default</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">나의 여행희망도시</th>
+					<th style="padding: 20px;" class="info">나의 여행희망도시</th>
 					<td style="padding: 20px;">Default</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">나의 여행 스타일</th>
+					<th style="padding: 20px;" class="warning">나의 여행 스타일</th>
 					<td style="padding: 20px;">Default</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">여행출발일</th>
+					<th style="padding: 20px;" class="danger">여행출발일</th>
 					<td style="padding: 20px;">
 						<input type="date" id="datepicker"  name="TRIP_BOARD_START">
 					</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">여행 종료일</th>
+					<th style="padding: 20px;" class="success">여행 종료일</th>
 					<td style="padding: 20px;">
 						<input type="date" id="datepicker2" name="TRIP_BOARD_END">
 					</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">여행 동행모집</th>
+					<th style="padding: 20px;" class="danger">여행 동행모집</th>
 					<td style="padding: 20px;">
 						<select id="TRIP_BOARD_TOGETHER" name="TRIP_BOARD_TOGETHER" class="form-control" style="width: 200px;">
-							<option value="0" >0</option>
+							<option value="0">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -116,7 +116,7 @@ th {
 					</td>
 				</tr>
 				<tr>
-					<th style="padding: 20px;">여행 소개</th>
+					<th style="padding: 20px;" class="info">여행 소개</th>
 					<td style="padding: 20px;">
 						<textarea rows="3" style="width: 500px;" name="trip_Board_Content"></textarea>
 					</td>

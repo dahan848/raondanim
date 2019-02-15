@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import statics.service.UserService;
+import trip.model.TripBoard;
 import trip.service.TripBoardService;
 
 //여행관련 컨트롤러
@@ -35,23 +36,26 @@ public class tripController {
 	
 	
 	@RequestMapping("/write1")
-	public String boardWrite1(Model model) {
+	public String boardWrite1() {
 		System.out.println("write1 요청받음");
-		
-		
-		
-		
+
 		
 		return "trip/TripBoardWriteForm1";
 	}
 	
 	
 	@RequestMapping("/write2")
-	public String boardWrite2() {
+	public String boardWrite2(TripBoard tripBoard) {
 		System.out.println("요청받음");
+		System.out.println(tripBoard);
 		return "trip/TripBoardWriteForm2";
 	}
 	
-	
+	@RequestMapping("/write3")
+	public String boardWrite3() {
+		
+		
+		return null;
+	}
 	
 }
