@@ -43,8 +43,8 @@ th {
 		class="navbar navbar-inverse navbar-sub navbar-sub-light hidden-xs">
 		<div class="container">
 			<ul class="nav navbar-nav navbar-core">
-				<li><a href="/accounts/profiles/update/">여행일정</a></li>
-				<li><a href="/accounts/profiles/update/personal/">여행리스트</a></li>
+			<li><a href="write1">여행일정</a></li>
+				<li><a href="list">여행리스트</a></li>
 			</ul>
 		</div>
 	</div>
@@ -74,7 +74,9 @@ th {
 
 				<tr>
 					<th style="padding: 20px;">제목</th>
-					<td style="padding: 20px;">Default</td>
+					<td style="padding: 20px;">
+						<input type="text">
+					</td>
 				</tr>
 				<tr>
 					<th style="padding: 20px;">나의 관심사</th>

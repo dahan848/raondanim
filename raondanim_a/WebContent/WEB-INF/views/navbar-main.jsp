@@ -43,6 +43,7 @@
 	        </div>
 	        <!-- 로그인 유/무에 따른 설정 정의 하어야함 -->
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	            <span><b style="color: green;">${userName}</b></span>
 	            <ul class="nav navbar-nav navbar-right">
                 	<li><a href="${contextPath}/statics/login">로그인</a></li>
 					<li><span class="vertical-separator"></span><a

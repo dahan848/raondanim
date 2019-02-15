@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statics.dao.UserDao">
+
+<insert id="insertUser" parameterType="user">
+insert into USER_TB
+(USER_NUM,USER_ID,USER_PW,USER_FNM,USER_LNM)
+values(USER_TB_SEQ.nextval,#{user_Id},#{user_Pw},#{user_Fnm},#{user_Lnm})
+</insert>
+
+<select id="selectOneByNum" parameterType="int" resultType="user">
+select *
+from USER_TB
+where USER_NUM = #{num}
+</select>
+
+<select id="selectOneById" parameterType="String" resultType="user">
+select *
+from USER_TB
+where USER_ID = #{id}
+</select>
+
+<select id="selectAll" resultType="user">
+select * 
+from USER_TB
+</select>
+
+
+</mapper>
