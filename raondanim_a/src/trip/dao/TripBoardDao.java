@@ -12,8 +12,6 @@ public interface TripBoardDao {
 	public TripBoard selectOneByBoardKey(int TripKey);
 	public TripBoard selectOneByUserNum(int userNum);
 	public List<TripBoard> selectAll();	
-	public List<TripBoard> getTripStartDateList();
-	public List<TripBoard> getTripEndDateList();
 	//페이징관련 메소드
 	public List<TripBoard> getTenBoardPage(Map<String, Object> params);
 	public int getTotalCount();

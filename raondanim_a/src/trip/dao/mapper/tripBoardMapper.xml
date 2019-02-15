@@ -5,35 +5,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="trip.dao.TripBoardDao">
 
-<insert id="insertBoard">
-
+<insert id="insertBoard" parameterType="tripBoard">
+insert into TRIP_BOARD_TB
+   (TRIP_BOARD_KEY,
+	USER_NUM,
+	TRIP_BOARD_TITLE,
+	TRIP_BOARD_COUNTENT,
+	TRIP_BOARD_START,
+	TRIP_BOARD_END,
+	TRIP_BOARD_TOGETHER)
+values(TRIP_BOARD_TB_SEQ,
+	  #{user_Num},
+	  #{trip_Board_Title},
+	  #{trip_Board_Content},
+	  #{trip_Board_Start},
+	  #{trip_Board_End},
+	  #{trip_Board_Together})
 </insert>
 
-<select id="selectOneByBoardKey">
+<select id="selectOneByBoardKey" parameterType="int" resultType="tripBoard">
+
+selcect *
+from TRIP_BOARD_TB
+where TRIP_BOARD_KEY = #{trip_Board_Key}
 
 </select>
 
-<select id="selectOneByUserNum">
+<select id="selectOneByUserNum" parameterType="int" resultType="tripBoard">
+
+select * 
+from TRIP_BOARD_TB
+where USER_NUM = #{num}
 
 </select>
 
-<select id="selectAll">
+<select id="selectAll" resultType="tripBoard">
+
+select * 
+from TRIP_BOARD_TB
 
 </select>
 
-<select id="getTripStartDateList">
+
+<select id="getTenBoardPage" parameterType="map" resultType="tripboard">
+select *
+from (select rownum as r,TRIP_BOARD_KEY,USER_NUM,TRIP_BOARD_TITLE,TRIP_BOARD_COUNTENT,TRIP_BOARD_START,TRIP_BOARD_END,TRIP_BOARD_TOGETHER,TRIP_BOARD_READCOUNT,TRIP_BOARD_ST,rcount
+      from   (select b.TRIP_BOARD_KEY,b.USER_NUM,b.TRIP_BOARD_TITLE,b.TRIP_BOARD_COUNTENT,b.TRIP_BOARD_START,b.TRIP_BOARD_END,b.TRIP_BOARD_TOGETHER,b.TRIP_BOARD_READCOUNT,b.TRIP_BOARD_ST,count(r.TRIP_REPLY_KEY) as rcount
+              from TRIP_BOARD_TB b left outer join TRIP_REPLY_TB r
+              on b.TRIP_BOARD_KEY = r.TRIP_BOARD_KEY
+              group by b.TRIP_BOARD_KEY,b.USER_NUM,b.TRIP_BOARD_TITLE,b.TRIP_BOARD_COUNTENT,b.TRIP_BOARD_START,b.TRIP_BOARD_END,b.TRIP_BOARD_TOGETHER,b.TRIP_BOARD_READCOUNT,b.TRIP_BOARD_ST
+              order by TRIP_BOARD_KEY desc))
+where r between #{start} and #{end}
+
+
 
 </select>
 
-<select id="getTripEndDateList">
+<select id="getTotalCount" resultType="tripBoard">
 
-</select>
-
-<select id="getTenBoardPage">
-
-</select>
-
-<select id="getTotalCount">
+select count(*)
+from TRIP_BOARD_TB
 
 </select>
 

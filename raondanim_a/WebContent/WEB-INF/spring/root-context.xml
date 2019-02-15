@@ -29,6 +29,8 @@
 </bean>
 
 
+
+
 <bean id="sqlSessionFactoryByTrip" class="org.mybatis.spring.SqlSessionFactoryBean">
 <property name="dataSource" ref="dataSource"></property>
 <property name="mapperLocations" value="classpath:trip/dao/mapper/**/*.xml"></property>
@@ -36,7 +38,7 @@
 </bean>
 
 <bean id="TripBoardDao" class="org.mybatis.spring.mapper.MapperFactoryBean" >
-<property name="mapperInterface" value="trip.dao.TripBoardDao1"></property>
+<property name="mapperInterface" value="trip.dao.TripBoardDao"></property>
 <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 </bean>
 
