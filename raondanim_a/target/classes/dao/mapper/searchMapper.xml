@@ -3,10 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.SearchDao">
-	<select id="searchByTravler" parameterType="">
+	<select id="selectUsersByCity" resultType="map">
 		SELECT *
-		  FROM user_tb
-		 WHERE tr_type = #{tr_type}
+		  FROM user_table
+		 WHERE user_city = #{city}
 	</select>
-	<select id="searchByCity" ></select>
+	<select id="selectUsersByLanguage" resultType="map">
+		SELECT *
+		  FROM user_table u
+		  JOIN language_table l
+		    ON u.user_num = l.user_num
+		 WHERE user_language = #{lang}
+	</select>
 </mapper>

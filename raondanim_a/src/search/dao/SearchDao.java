@@ -1,12 +1,16 @@
 package search.dao;
 
+import java.util.List;
+
+import search.model.User;
+
 public interface SearchDao {
-	public int searchByTravler(String tr_type);
-	public int searchByCity(String city);
-	public int searchByLanguage(String lang);
-	public int searchByTourStyle(String tr_styles);
-	public int searchByName(String name);
-	public int searchByGender(int gender);
-	public int searchByNation(String nation);
-	public int searchByInterest(String interest);
+	public List<User> selectUsersByCity();
+	public List<User> selectOneByLanguage(String lang);
+	public List<User> selectOneByTourStyles(String trStyles);
+	public List<User> selectOneByName(String name);
+	public List<User> selectOneByGender(String gender);
+	public List<User> selectOneByNation(String nation);
+	public List<User> selectOneByInterest(String interest);
+	public List<User> selectAll();
 }
