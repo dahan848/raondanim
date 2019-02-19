@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 시큐리티 스캔을 위한 .. -->
+	<context:component-scan base-package="security" />
+
+	<!-- 시큐리티 기본 설정 -->
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/statics/test"
+			access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/statics/home"
+			access="permitAll" />
+		<security:form-login 
+			username-parameter="user_id"
+			password-parameter="user_pw" 
+			login-page="/statics/loginForm"
+			login-processing-url="/statics/login"
+			default-target-url="/statics/home"
+			authentication-failure-handler-ref="loginFailureHandler" />
+	</security:http>
+	
+	<!-- 시큐리티 로그인 실패 핸들러 -->
+	<bean id="loginFailureHandler"
+		class="security.LoginFailureHandler">
+		<property name="loginidname" value="user_id" />
+		<property name="loginpwdname" value="user_pw" />
+		<property name="errormsgname" value="ERRORMSG" />
+		<property name="defaultFailureUrl" value="/statics/loginFail" />
+	</bean>
+	
+	<!-- 시큐리티 로그인 DB 연결부 -->
+	<security:jdbc-user-service data-source-ref="dataSource"/>
+	
+	<!-- 시큐리티 Provider 등록 -->
+	<security:authentication-manager>
+		<security:authentication-provider 
+		user-service-ref="userService"/>
+	</security:authentication-manager>
+	
+	<bean id="userService" class="security.CustomUserDetailsService"/>
+
+</beans>

@@ -6,47 +6,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	<!-- 시큐리티 스캔을 위한 .. -->
-	<context:component-scan base-package="security" />
-	
 	<!-- statics 서비스 스캔 -->
-	<context:component-scan base-package="statics.service" />
-	
+	<context:component-scan
+		base-package="statics.service" />
+		
+	<!-- 서비스 패키지 스캔 -->
+	<context:component-scan base-package="service"/>
 
-	<!-- 시큐리티 기본  설정 -->
-	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/statics/test" access="hasRole('ROLE_USER')"/>
-		<security:intercept-url pattern="/statics/home" access="permitAll" /> 
-		<security:form-login 
-			username-parameter="user_id"
-			password-parameter="user_pw"
-			login-page="/statics/loginForm"
-			login-processing-url="/statics/login"
-			default-target-url="/statics/home"
-			authentication-failure-handler-ref="loginFailureHandler"
-			/>
-	</security:http>
-	
-
-
-	<!-- 시큐리티 로그인 실패 핸들러 -->
-	<bean id="loginFailureHandler" class="security.LoginFailureHandler">
-	    <property name="loginidname" value="user_id"/>
-	    <property name="loginpwdname" value="user_pw"/>
-	    <property name="errormsgname" value="ERRORMSG"/>
-	    <property name="defaultFailureUrl" value="/statics/test3"/>
-	</bean>
-
-
-
-
-	<!-- 시큐리티 Provider 등록 -->
-    <security:authentication-manager>
-        <security:authentication-provider ref="customAuthenticationProvider"/>
-    </security:authentication-manager>
-    
-    <!-- DAO 사용을 위한 설정 -->
-    <bean id="dataSource"
+	<!-- DAO 사용을 위한 설정 -->
+	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver"></property>
@@ -57,16 +25,51 @@
 	</bean>
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="typeAliasesPackage" value="statics/model"></property>
+		<property name="typeAliasesPackage" value="model"></property>
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mapperLocations"
-			value="classpath:statics/dao/mapper/**/*.xml"></property>
+			value="classpath:dao/mapper/**/*.xml"></property>
 	</bean>
-	
+
 	<!-- DAO -->
-	<bean id = "testUserDao" class = "org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="statics.dao.testUserDao"></property>
+	<bean id="testUserDao"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="dao.testUserDao"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
-	
+
+	<bean id="userAuthDao"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="dao.userAuthDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<!-- Encoding 설정 -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- Reload Cache 설정 -->
+		<property name="cacheSeconds" value="5" />
+		<!-- basenames 설정: 아래처럼 하면 WEB-INF 밑의 message 폴더 아래의 labels로 시작하는 모든 Property -->
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/message/message</value>
+			</list>
+		</property>
+	</bean>
+	<!-- MessageSource를 사용하기 위한 Accessor 설정 -->
+	<bean id="messageSourceAccessor"
+		class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg ref="messageSource" />
+	</bean>
+	<!-- MessageSource를 사용하기위한 MessageUtils 매핑 -->
+	<bean id="message" class="security.MessageUtils">
+		<property name="messageSourceAccessor"
+			ref="messageSourceAccessor" />
+	</bean>
+	<!-- Default Location 설정 -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko"></property>
+	</bean>
 </beans>

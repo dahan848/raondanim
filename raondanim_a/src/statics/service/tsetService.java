@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
-import statics.dao.testUserDao;
-import statics.model.TestUser;
+import dao.testUserDao;
+import model.TestUser;
 
 @Service
 public class tsetService {
@@ -21,7 +21,7 @@ public class tsetService {
 	private testUserDao dao;
 	private TestUser user = new TestUser(); 
 	
-	public boolean join(Map<String, Object> param) {
+	public boolean join(Map<String, Object> param) { //회원가입 
 		user.setEmail((String)param.get("user_id"));
 		user.setPass((String)param.get("user_pw"));
 		if(dao.insertUser(user) > 0) {
@@ -34,7 +34,7 @@ public class tsetService {
 		
 	}
 	
-	public void logout(HttpServletRequest request,HttpServletResponse response) {
+	public void logout(HttpServletRequest request,HttpServletResponse response) { //로그아웃
 		//현재 서비스에서 권한부분을 삭제 
 		//현재 서비스에서 권한을 얻어와서 권한이 null아니면, 
 		//현재권한에 대해서 logout처리
@@ -45,6 +45,8 @@ public class tsetService {
 			.logout(request, response, auth);
 		}
 	}
+	
+	
 	
 	
 }

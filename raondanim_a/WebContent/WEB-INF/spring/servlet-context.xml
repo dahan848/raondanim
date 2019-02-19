@@ -6,8 +6,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 컨트롤러 사용을 위한 스캔 -->
 	<context:component-scan
 		base-package="statics.controller" />
+		
 	<!-- 파일 첨부 시, 요청에 포함되어있는 multipart를 처리해주는 Resolver -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">

@@ -10,15 +10,18 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// TODO Auto-generated method stub
 		System.out.println("Authentication 접근 !");
-		String principal = (String)authentication.getPrincipal();
-		String credentials = (String)authentication.getCredentials();
+		//로그인 페이지에서 입력 된 아이디(이메일), 비밀번호 변수에 참조 
+		String userid = authentication.getName();
+		String password = (String) authentication.getCredentials();
+		UsernamePasswordAuthenticationToken authToken = null;
+
+		
 		GrantedAuthority auth= new GrantedAuthority() {
 			
 			@Override
@@ -29,7 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		};
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(auth);
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(principal, credentials, authorities);
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userid, password, authorities);
 		return token;
 	}
 

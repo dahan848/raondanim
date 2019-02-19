@@ -1,7 +1,7 @@
 package statics.controller;
 //기본 컨트롤러 : 네브바, 로그인, 유저 관련 기능 담당
 
-import java.security.Principal;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,25 +53,33 @@ public class staticsController {
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request,HttpServletResponse response,Principal principal) {
-		System.out.println(principal.getName());
+	public String logout(HttpServletRequest request,HttpServletResponse response) {
 		service.logout(request, response);
 		return "redirect:home";
 	}
 	
-	@RequestMapping("/test")
-	public String test() {
-		return "statics/profile-update";
+	@RequestMapping("/infrodcution")
+	public String infrodcution() {
+		System.out.println("statics : 사이트 소개 화면 요청 받음");
+		return "statics/infrodcution";
 	}
 	
-	@RequestMapping("/test2")
-	public String test2() {
-		return "statics/test02";
+	@RequestMapping("/profile/update1")
+	public String profile() {
+		System.out.println("statics : 프로필 수정 화면(1) 요청 받음");
+		return "statics/profile-update1";
 	}
 	
-	@RequestMapping("/test3")
-	public String test3() {
-		return "statics/test03";
+	@RequestMapping("/profile/personal")
+	public String profilePersonal() {
+		System.out.println("statics : 개인정보 화면 요청 받음");
+		return "statics/profile-personal";
+	}
+	
+
+	@RequestMapping("/loginFail")
+	public String loginFail() {
+		return "statics/loginFail";
 	}
 	
 	
