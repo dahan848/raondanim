@@ -5,7 +5,7 @@
     <div class="container">
         <ul class="nav navbar-nav">
 	         <li><a href="myp.jsp">나의 정보</a></li>
-	         <li><a href="#">회원 검색</a></li>
+	         <li><a href="${contextPath}/search/home">회원 검색</a></li>
 	         <li><a href="#">여행</a></li>
 	         <li><a href="#">숙박</a></li>
 	         <li><a href="#">후기</a></li>

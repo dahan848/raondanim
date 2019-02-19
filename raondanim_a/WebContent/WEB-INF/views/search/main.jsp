@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%
-	request.setAttribute("contextPath", request.getContextPath());
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setAttribute("contextPath", request.getContextPath()); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +7,6 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>회원검색</title>
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="${contextPath}/css/bootstrap-social.css">
 <link rel="stylesheet" href="${contextPath}/css/commonness.css">
@@ -24,14 +16,11 @@
 	<jsp:include page="/WEB-INF/views/navbar-main.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/navbar-sub.jsp"></jsp:include>
 	<div class="main-container">
-
 		<section id="section-profile-list">
 			<div class="container">
 				<h3 class="section-title">
-					<img class="section-header-icon"
-						src="/static/potluck/img/icon/Alarm.png" alt=""> 검색
+					<img class="section-header-icon" src="${contextPath}/img/Alarm.png" alt=""> 검색
 				</h3>
-
 				<form id="form-search" class="form-horizontal form-filter">
 					<div class="panel panel-default">
 						<div class="panel-heading">
