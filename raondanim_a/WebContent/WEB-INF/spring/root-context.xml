@@ -25,7 +25,7 @@
 
 <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean" >
 <property name="mapperInterface" value="statics.dao.UserDao"></property>
-<property name="sqlSessionFactory" ref="sqlSessionFactoryByTrip"></property>
+<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 </bean>
 
 
@@ -39,7 +39,7 @@
 
 <bean id="TripBoardDao" class="org.mybatis.spring.mapper.MapperFactoryBean" >
 <property name="mapperInterface" value="trip.dao.TripBoardDao"></property>
-<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+<property name="sqlSessionFactory" ref="sqlSessionFactoryByTrip"></property>
 </bean>
 
 

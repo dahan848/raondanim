@@ -21,8 +21,8 @@
 				<img src="../img/logo-raon.png" alt="">
 				
 				<form action="register" method="post">
-					<input type='hidden' name='csrfmiddlewaretoken'
-						value='WugrKT4hJJGeTo0KuRrvlFFYcFLjUpAeKHffPU6fFDwmLTcYmypnrg3Xk2bmUlWX' />
+<!-- 					<input type='hidden' name='csrfmiddlewaretoken' -->
+<!-- 						value='WugrKT4hJJGeTo0KuRrvlFFYcFLjUpAeKHffPU6fFDwmLTcYmypnrg3Xk2bmUlWX' /> -->
 					<div class="form-group">
 						<label class="sr-only control-label" for="id_email">이메일</label><input
 							class="form-control" id="user_Id" name="user_Id"

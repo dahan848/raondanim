@@ -42,8 +42,10 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public boolean CheckPw(int userNum, String pw) {
+		User user = selectOneByNum(userNum);
 		
-		if(userDao.selectOneByNum(userNum)!=null && userDao.selectOneByNum(userNum).getUser_Pw().equals(pw)) {
+		
+		if(user!=null && user.getUser_Pw().equals(pw)) {
 			
 			return true;
 		}else {
@@ -56,9 +58,9 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public User selectOneById(String Id) {
+	public User selectOneById(String id) {
 		
-		return userDao.selectOneById(Id);
+		return userDao.selectOneById(id);
 	}
 
 }

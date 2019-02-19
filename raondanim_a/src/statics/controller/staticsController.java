@@ -32,7 +32,9 @@ public class staticsController {
 	
 	@RequestMapping("/log")
 	public String login(String user_Id, String user_Pw, HttpServletRequest req) {
+
 		int userNum = userService.selectOneById(user_Id).getUser_Num();
+		
 		
 		if(userService.selectOneById(user_Id)!=null && userService.CheckPw(userNum, user_Pw)) {
 			HttpSession session = req.getSession();
@@ -57,7 +59,7 @@ public class staticsController {
 	
 	@RequestMapping("/register")
 	public String join(User user) {
-		System.out.println(user);
+		
 		if(userService.insertUser(user)) {
 			
 			return "redirect:login";

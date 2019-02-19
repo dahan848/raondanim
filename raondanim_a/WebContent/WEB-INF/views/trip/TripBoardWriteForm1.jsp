@@ -70,6 +70,7 @@ th {
 		</p>
 		<br>
 		<form action="write2">
+			<input type="text" value="${userNum}" name="user_Num">
 			<table class="table" id="ta">
 
 				<tr>
@@ -93,19 +94,19 @@ th {
 				<tr>
 					<th style="padding: 20px;" class="danger">여행출발일</th>
 					<td style="padding: 20px;">
-						<input type="date" id="datepicker"  name="TRIP_BOARD_START">
+						<input type="date" id="datepicker"  name="trip_Board_Start">
 					</td>
 				</tr>
 				<tr>
 					<th style="padding: 20px;" class="success">여행 종료일</th>
 					<td style="padding: 20px;">
-						<input type="date" id="datepicker2" name="TRIP_BOARD_END">
+						<input type="date" id="datepicker2" name="trip_Board_End">
 					</td>
 				</tr>
 				<tr>
 					<th style="padding: 20px;" class="danger">여행 동행모집</th>
 					<td style="padding: 20px;">
-						<select id="TRIP_BOARD_TOGETHER" name="TRIP_BOARD_TOGETHER" class="form-control" style="width: 200px;">
+						<select id="Trip_Board_Together" name="Trip_Board_Together" class="form-control" style="width: 200px;">
 							<option value="0">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
