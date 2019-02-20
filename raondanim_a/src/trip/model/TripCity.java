@@ -7,6 +7,8 @@ public class TripCity {
 	String trip_City_Lat;
 	String trip_City_Lng;
 	String trip_City_Pid;
+	
+	
 	public int getTrip_City_Key() {
 		return trip_City_Key;
 	}

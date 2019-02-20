@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import trip.model.TripBoard;
+import trip.model.TripCity;
+import trip.model.TripRel;
 
 public interface TripBoardDao {
 	//입력메소드
@@ -16,14 +18,20 @@ public interface TripBoardDao {
 	public List<TripBoard> getTenBoardPage(Map<String, Object> params);
 	public int getTotalCount();
 
-	
-	
-	
+
 	/////////////////////////////////////////////
-	//여행도시 관련 테이블도 같이 작성?
-	//아님 모델하고 dao따로 빼서?
+	//도시테이블 메소드
+	public int insertCity(TripCity tripCity);
+	public TripCity selectOneByCity(Map<String, Object> params);
+	public List<TripCity> selectAllByCity();
 	
 	
+	
+	
+	////////////////////////////////////////////
+	//관계테이블 메소드
+	public int insertRel(TripRel tripRel);
+	//관계 테이블 낀 조회 메소드는 테스트 데이터 집어놓고 나서 
 	
 	
 }

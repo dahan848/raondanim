@@ -114,6 +114,8 @@ html, body {
 							document.getElementById('cityLng').value = place.geometry.location
 									.lng();
 							document.getElementById('placeId').value = place.place_id;
+							//document.getElementById('formatted_address').value = place.reviews;
+							
 						});
 	}
 	//윈도우 onload시 실행
@@ -304,6 +306,7 @@ html, body {
 			<div class="col-lg-4" id="cc">
 				<div class="row" id="cc">
 					<div class="col-lg-8">
+<!-- 					<input type="text" id="formatted_address"> -->
 						<input id="searchTextField" type="text" size="50"
 							placeholder="도시를 입력하세요" autocomplete="on" runat="server" class="form-control" /> 
 							<input type="hidden" id="cityName"

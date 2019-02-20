@@ -6,6 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="trip.dao.TripBoardDao">
 
 <insert id="insertBoard" parameterType="tripBoard">
+<selectKey order="BEFORE" keyProperty="trip_Board_Key" resultType="int">
+	select TRIP_BOARD_TB_SEQ.nextval from dual
+</selectKey>
 insert into TRIP_BOARD_TB
    (TRIP_BOARD_KEY,
 	USER_NUM,
@@ -14,7 +17,7 @@ insert into TRIP_BOARD_TB
 	TRIP_BOARD_START,
 	TRIP_BOARD_END,
 	TRIP_BOARD_TOGETHER)
-values(TRIP_BOARD_TB_SEQ,
+values(#{trip_Board_Key},
 	  #{user_Num},
 	  #{trip_Board_Title},
 	  #{trip_Board_Content},
@@ -67,6 +70,63 @@ select count(*)
 from TRIP_BOARD_TB
 
 </select>
+
+<!--도시 테이블 메소드  -->
+<insert id="insertCity" parameterType="tripCity">
+<selectKey order="BEFORE" keyProperty="trip_City_Key" resultType="int">
+select TRIP_CITY_TB_SEQ.nextval from dual
+</selectKey>
+insert into TRIP_CITY_TB
+values(	#{trip_City_Key},
+		#{trip_City_Town},
+		#{trip_City_Lat},
+		#{trip_City_Lng},
+		#{trip_City_Lng})
+
+
+</insert>
+
+<select id="selectOneByCity" parameterType="map" resultType="tripCity">
+select *
+from TRIP_CITY_TB
+where 1=0
+<if test="key!=null">
+or TRIP_CITY_KEY = ('${key}')
+</if>
+<if test="town!=null">
+or TRIP_CITY_TOWN = ('${town}')
+</if>
+<if test="lat!=null">
+or TRIP_CITY_LAT = ('${lat}')
+</if>
+<if test="lng!=null">
+or TRIP_CITY_LNG = ('${lng}')
+</if>
+<if test="pid!=null">
+or TRIP_CITY_PID = ('${pid}')
+</if>
+
+
+</select>
+
+<select id="selectAllByCity" resultType="tripCity">
+
+select * 
+from TRIP_CITY_TB
+
+</select>
+
+
+<!--도시 테이블 메소드 끝  -->
+<!--관계 테이블 메소드  -->
+<insert id="insertRel" parameterType="tripRel">
+insert into TRIP_REL_TB
+values(TRIP_REL_TB_SEQ.nextval,#{trip_Board_Key},#{trip_City_Key},#{user_Num})
+</insert>
+
+
+
+
 
 
 </mapper>
