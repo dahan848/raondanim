@@ -4,13 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>회원검색</title>
-<!-- CSS -->
-<link rel="stylesheet" href="${contextPath}/css/bootstrap-social.css">
-<link rel="stylesheet" href="${contextPath}/css/commonness.css">
-<link rel="stylesheet" href="${contextPath}/css/font-awesome.css">
+<!-- CSS START -->
+<link rel="stylesheet" href="${contextPath}/css/bootstrap-social.css"/>
+<link rel="stylesheet" href="${contextPath}/css/commonness.css"/>
+<link rel="stylesheet" href="${contextPath}/css/font-awesome.css"/>
+<link rel="stylesheet" href="${contextPath}/css/select2.min.css"/>
+<!-- CSS END -->
+<!-- select2 4.0.5 START -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+<!-- select2 4.0.5 END -->
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/navbar-main.jsp"></jsp:include>
@@ -30,52 +34,48 @@
 							<div class="tab-content">
 								<div id="form-simple" class="tab-pane active">
 									<div class="form-group">
-										<label class="sr-only control-label" for="id_search">검색</label><input
-											class="form-control" id="id_search" name="search"
-											placeholder="지역, 관심사, 직업, 이름, 닉네임 검색" title="" type="text" />
+										<label class="sr-only control-label" for="id_search">검색</label>
+										<input class="form-control" id="id_search" name="search" placeholder="지역, 관심사, 직업, 이름, 닉네임 검색" title="" type="text"/>
 									</div>
 									<div class="text-center">
-										<a class="btn-collapse" data-toggle="tab" href="#form-detail"><i
-											class="fa fa-chevron-down mr-5" aria-hidden="true"></i>조건 추가</a>
+										<a class="btn-collapse" data-toggle="tab" href="#form-detail">
+										<i class="fa fa-chevron-down mr-5" aria-hidden="true"></i>조건 추가
+										</a>
 									</div>
 								</div>
-								<div id="form-detail" class="tab-pane ">
+								<div id="form-detail" class="tab-pane">
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label class="col-sm-3 control-label"
-													for="id_traveler_type_0">검색 대상</label>
+												<label class="col-sm-3 control-label" for="id_traveler_type_0">검색 대상</label>
 												<div class="col-sm-9">
 													<div id="id_traveler_type">
 														<div class="radio">
-															<label for="id_traveler_type_0"><input class=""
-																id="id_traveler_type_0" name="traveler_type" title=""
-																type="radio" value="local" /> 현지친구</label>
+															<label for="id_traveler_type_0">
+															<input class="" id="id_traveler_type_0" name="traveler_type" title="" type="radio" value="local"/>현지친구
+															</label>
 														</div>
 														<div class="radio">
-															<label for="id_traveler_type_1"><input class=""
-																id="id_traveler_type_1" name="traveler_type" title=""
-																type="radio" value="traveler" /> 여행자</label>
+															<label for="id_traveler_type_1">
+															<input class="" id="id_traveler_type_1" name="traveler_type" title="" type="radio" value="traveler"/>여행자
+															</label>
 														</div>
 													</div>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label" for="id_city">거주
-													도시</label>
+												<label class="col-sm-3 control-label" for="id_city">거주 도시</label>
 												<div class="col-sm-9">
-													<select
-														class="form-control django-select2 django-select2-heavy"
-														data-ajax--cache="true" data-ajax--type="GET"
-														data-ajax--url="/select2/fields/auto.json"
-														data-allow-clear="true"
-														data-field_id="MTM5NzE4OTQwMzQ3MzQ0:1gve7B:j7qgMg8hBEiUEjoElY0qRpdiBBI"
-														data-minimum-input-length="0" data-placeholder="선택"
-														id="id_city" name="city" title="">
+													<select class="form-control django-select2 django-select2-heavy" 
+													data-ajax--cache="true" data-ajax--type="GET" 
+													data-ajax--url="/select2/fields/auto.json" 
+													data-allow-clear="true" 
+													data-field_id="MTM5NzE4OTQwMzQ3MzQ0:1gve7B:j7qgMg8hBEiUEjoElY0qRpdiBBI" 
+													id="id_city" name="city" title="">
 														<option></option>
 													</select>
 												</div>
-											</div>
+											</div>	
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="id_languages">사용
 													언어</label>
@@ -1058,49 +1058,8 @@
 				</div>
 			</div>
 		</section>
-
 	</div>
-
-
-	<footer class="hidden-xs">
-		<div class="container">
-			<div class="col-sm-3">
-				<img src="/static/potluck/img/icon/potlucktrip.png">
-			</div>
-			<div class="col-sm-3">
-				<ul>
-					<li><h5>Service</h5></li>
-					<li><a href="/policies/privacy/">Privacy</a></li>
-					<li><a href="/policies/terms/">Terms</a></li>
-				</ul>
-			</div>
-			<div class="col-sm-3">
-				<ul>
-					<li><h5>Company</h5></li>
-
-					<li><a href="/about/about-us/">About us</a></li>
-
-					<li><a href="/about/partners/">Partners</a></li>
-
-					<li><a href="/inquiry/create/">Contact us</a></li>
-				</ul>
-			</div>
-			<div class="col-sm-3">
-				<ul>
-					<li><h5>Social Media</h5></li>
-					<li><a href="//blog.potlucktrip.com" target="_blank">Blog</a></li>
-					<li><a href="https://www.facebook.com/potlucktrip"
-						target="_blank">Facebook</a></li>
-				</ul>
-			</div>
-
-
-
-
-
-
-
-
-		</div>
+	<script src="${contextPath}/js/search-detail.js"></script>
+	<script src="${contextPath}/js/jquery-1.10.2.min.js"></script>
 </body>
 </html>
