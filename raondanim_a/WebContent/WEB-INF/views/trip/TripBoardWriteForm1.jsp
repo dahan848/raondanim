@@ -69,7 +69,7 @@ th {
 			여행상품, 패키지 상품 등 기타 상업적인 목적의 이용은 금지사항 입니다
 		</p>
 		<br>
-		<form action="write2">
+		<form action="write2" method="post">
 			<input type="text" value="${userNum}" name="user_Num">
 			<table class="table" id="ta">
 

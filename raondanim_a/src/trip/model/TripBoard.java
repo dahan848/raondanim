@@ -19,8 +19,8 @@ public class TripBoard {
 	int user_Num;
 	String trip_Board_Title;
 	String trip_Board_Content;
-	Date trip_Board_Start;
-	Date trip_Board_End;
+	String trip_Board_Start;
+	String trip_Board_End;
 	int trip_Board_Together;
 	int trip_Board_Readcount;
 	int trip_Board_St;
@@ -48,16 +48,16 @@ public class TripBoard {
 	public void setTrip_Board_Content(String trip_Board_Content) {
 		this.trip_Board_Content = trip_Board_Content;
 	}
-	public Date getTrip_Board_Start() {
+	public String getTrip_Board_Start() {
 		return trip_Board_Start;
 	}
-	public void setTrip_Board_Start(Date trip_Board_Start) {
+	public void setTrip_Board_Start(String trip_Board_Start) {
 		this.trip_Board_Start = trip_Board_Start;
 	}
-	public Date getTrip_Board_End() {
+	public String getTrip_Board_End() {
 		return trip_Board_End;
 	}
-	public void setTrip_Board_End(Date trip_Board_End) {
+	public void setTrip_Board_End(String trip_Board_End) {
 		this.trip_Board_End = trip_Board_End;
 	}
 	public int getTrip_Board_Together() {

@@ -139,7 +139,8 @@ html, body {
 		var cities = {
 				cityName:cityName,
 				lat : parseFloat(cityLat),
-				lng : parseFloat(cityLng)
+				lng : parseFloat(cityLng),
+				placeId : placeId
 			};
 		cityNames.push(cities);
 		
@@ -264,6 +265,7 @@ html, body {
 		
 		
 		$("#sendWrite").on("submit", function() {
+			//JSON.stringify 배열을 json데이터로 변환해주는 뇨속
 			var arrToJson = JSON.stringify(cityNames);
 			alert(arrToJson);
 			
@@ -368,8 +370,12 @@ html, body {
 						<div class="row">
 							<div class="col-sm-12">
 								
-								<form action="write3" id="sendWrite">
-									<input type="hidden" id="boardWrite1" value="${tripBoard}" name="tripBoard">
+									<form action="write3" id="sendWrite">
+									<input type="hidden" id="boardWrite1" value="${tripBoard.user_Num}" name="user_Num">
+									<input type="hidden" id="boardWrite1" value="${tripBoard.trip_Board_Title}" name="trip_Board_Title">
+									<input type="hidden" id="boardWrite1" value="${tripBoard.trip_Board_Start}" name="trip_Board_Start">
+									<input type="hidden" id="boardWrite1" value="${tripBoard.trip_Board_End}" name="trip_Board_End">
+									<input type="hidden" id="boardWrite1" value="${tripBoard.trip_Board_Content}" name="trip_Board_Content">
 									<input type="hidden" id="boardWrite2" value="" name="tripCity">
 									<input type="submit" value="작성완료" class="btn btn-primary btn-sm">
 								</form>
