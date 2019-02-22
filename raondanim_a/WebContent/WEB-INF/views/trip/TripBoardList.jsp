@@ -1,13 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%
+	request.setAttribute("contextPath", request.getContextPath());
+%>
 <!DOCTYPE html>
 <html>
 <head>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK7HNKK_tIyPeV3pVUZKvX3f_arONYrzc
+&callback=initMap">
+    </script>
+   <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
 #con {
-	height: 1200px;
+	height: 1500px;
 }
 
 #con1 {
@@ -23,7 +33,58 @@
 	margin-bottom: 30px;
 	padding: 0;
 }
+
 </style>
+
+<script type="text/javascript">
+
+	var locations = [];
+
+	function initMap() {
+		// 검색한 지도
+		var labels = '123456789';
+
+		var uluru = {
+			lat : 37.566535,
+			lng : 126.97796919999996
+		};
+		// The map, centered at Uluru
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 2,
+			center : uluru
+		});
+		// The marker, positioned at Uluru
+		var markers = locations.map(function(location, i) {
+			return new google.maps.Marker({
+				position : location,
+				label : labels[i % labels.length],
+				animation : google.maps.Animation.DROP
+			});
+		});
+		var markerCluster = new MarkerClusterer(
+				map,
+				markers,
+				{
+					imagePath : 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+				});
+		
+	}
+	window.onload = function() {
+		var loc = "${tripLatLng}";
+		alert(loc);
+ 		/* for(var i in loc){
+			var location = {
+ 				lat: loc[i].lat,
+ 				lng: loc[i].lng
+ 			};
+ 			locations.push(latlng);
+			alert(locations[i].lat+""+locations[i].lng);
+ 		} */
+		
+		//initMap();
+		
+	}
+</script>
 </head>
 <body>
 	<!-- 헤더 시작 -->
@@ -51,72 +112,112 @@
 
 
 		<div class="container" id="con2">
-
+		
 			<h1>동행친구 리스트</h1>
 
 			<!--맵자리 시작  -->
-			<div style="height: 500px; border: 1px solid black;">지도자리</div>
+			<div style="height: 500px; border: 1px solid black;" id="map"></div>
 			<!--맵자리 끝  -->
 
 
-
-			<h1>테이블 들어갈 자리</h1>
 			<input type="button" value="검색" style="width: 100%;"
-				class="btn btn-success">
+				class="btn btn-success" data-toggle="collapse" data-target="#search">
+			<div id="search" class="collapse" style="border: 1px solid;">
+				<div class="container" style="height: 100px;">
+					<form class="form-inline" action="list" method="get">
+						<br> <br> <select class="form-control" name="type"
+							style="width: 80px;">
+							<option value="0">검색</option>
+							<option value="1">제목</option>
+							<option value="2">출발일</option>
+							<option value="3">종료일</option>
+							<option value="4">여행자</option>
+						</select>
+
+						<div class="form-group">
+							<input type="text" class="form-control" id="keyword"
+								placeholder="검색어를 입력하세요" name="keyword" style="width: 500px;">
+						</div>
+
+						<button type="submit" class="btn btn-default">검색</button>
+					</form>
+				</div>
+			</div>
+
 			<table class="table">
 				<thead>
 					<tr class="warning">
-						<th>여행자</th>
-						<th>제목</th>
-						<th>여행기간</th>
-						<th>관심사</th>
-						<th>여행스타일</th>
-						<th>동행하는인수</th>
-						<th>조회수</th>
+						<th><h5>
+								<b></b>
+							</h5></th>
+						<th><h5>
+								<b>여행자</b>
+							</h5></th>
+						<th><h5>
+								<b>제목</b>
+							</h5></th>
+						<th><h5>
+								<b>여행기간</b>
+							</h5></th>
+						<th><h5>
+								<b>관심사</b>
+							</h5></th>
+						<th><h5>
+								<b>여행스타일</b>
+							</h5></th>
+						<th><h5>
+								<b>동행하는인수</b>
+							</h5></th>
+						<th><h5>
+								<b>조회수</b>
+							</h5></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Default</td>
-						<td>Defaultson</td>
-						<td>def@somemail.com</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-					</tr>
-					<tr>
-						<td>Default</td>
-						<td>Defaultson</td>
-						<td>def@somemail.com</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-					</tr>
-					<tr>
-						<td>Default</td>
-						<td>Defaultson</td>
-						<td>def@somemail.com</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-					</tr>
-					<tr>
-						<td>Default</td>
-						<td>Defaultson</td>
-						<td>def@somemail.com</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-						<td>Default</td>
-					</tr>
+
+					<c:forEach items="${tripData.tripBoardList}" var="list">
+						<tr>
+							<td><c:if test="${list.USER_PROFILE_PIC==0}">
+									<img alt="" src="${contextPath}/img/Profile.png">
+								</c:if></td>
+							<td>${list.USER_NICK}</td>
+							<td>${list.TRIP_BOARD_TITLE}</td>
+
+
+
+							<td><f:formatDate value="${list.TRIP_BOARD_START}"
+									pattern="yyyy-MM-dd" /> &nbsp;<strong>~</strong>&nbsp; <f:formatDate
+									value="${list.TRIP_BOARD_END}" pattern="yyyy-MM-dd" /></td>
+
+
+
+							<td>default</td>
+							<td>default</td>
+							<td>${list.TRIP_BOARD_TOGETHER}</td>
+							<td>${list.TRIP_BOARD_READCOUNT}</td>
+						</tr>
+					</c:forEach>
 
 				</tbody>
 			</table>
+			<div class="container">
+				<ul class="pager">
+					<c:if test="${tripData.page!=1}">
+						<li><a
+							href="list?pageNum=${param.pageNum-1}&type=${param.type}&keyword=${param.keyword}">Previous</a></li>
+					</c:if>
+					<c:forEach var="pageNum" begin="${tripData.start}"
+						end="${tripData.end < tripData.total ? tripData.end: tripData.total}">
+						<a
+							href="list?pageNum=${pageNum}&type=${param.type}&keyword=${param.keyword}">${pageNum}&nbsp;&nbsp;&nbsp;</a>
+					</c:forEach>
+					<c:if test="${tripData.page!=tripData.total}">
+						<li><a
+							href="list?pageNum=${param.pageNum+1}&type=${param.type}&keyword=${param.keyword}">Next</a></li>
+					</c:if>
+				</ul>
+			</div>
 		</div>
-
 
 
 	</div>
@@ -125,7 +226,9 @@
 	<!--바디끝  -->
 
 	<!-- 푸터 끝 -->
+
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+
 	<!-- 푸터 끝 -->
 
 

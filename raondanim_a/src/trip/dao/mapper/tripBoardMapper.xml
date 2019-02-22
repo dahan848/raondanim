@@ -50,24 +50,78 @@ from TRIP_BOARD_TB
 </select>
 
 
-<select id="getTenBoardPage" parameterType="map" resultType="tripboard">
+<select id="getTenBoardPage" parameterType="map" resultType="map">
+<!--관심사 희망 여행도시는 못뽑음 테이블 안만듬  -->
 select *
-from (select rownum as r,TRIP_BOARD_KEY,USER_NUM,TRIP_BOARD_TITLE,TRIP_BOARD_COUNTENT,TRIP_BOARD_START,TRIP_BOARD_END,TRIP_BOARD_TOGETHER,TRIP_BOARD_READCOUNT,TRIP_BOARD_ST,rcount
-      from   (select b.TRIP_BOARD_KEY,b.USER_NUM,b.TRIP_BOARD_TITLE,b.TRIP_BOARD_COUNTENT,b.TRIP_BOARD_START,b.TRIP_BOARD_END,b.TRIP_BOARD_TOGETHER,b.TRIP_BOARD_READCOUNT,b.TRIP_BOARD_ST,count(r.TRIP_REPLY_KEY) as rcount
-              from TRIP_BOARD_TB b left outer join TRIP_REPLY_TB r
-              on b.TRIP_BOARD_KEY = r.TRIP_BOARD_KEY
-              group by b.TRIP_BOARD_KEY,b.USER_NUM,b.TRIP_BOARD_TITLE,b.TRIP_BOARD_COUNTENT,b.TRIP_BOARD_START,b.TRIP_BOARD_END,b.TRIP_BOARD_TOGETHER,b.TRIP_BOARD_READCOUNT,b.TRIP_BOARD_ST
-              order by TRIP_BOARD_KEY desc))
-where r between #{start} and #{end}
+from (select 
+               rownum as r,
+               TRIP_BOARD_KEY,
+               USER_NUM,
+               user_nick,
+               USER_PROFILE_PIC,
+               TRIP_BOARD_TITLE,
+               TRIP_BOARD_COUNTENT,
+               TRIP_BOARD_START,
+               TRIP_BOARD_END,
+               TRIP_BOARD_TOGETHER,
+               TRIP_BOARD_READCOUNT,
+               TRIP_BOARD_ST
+        from (select    b.TRIP_BOARD_KEY,
+                        u.USER_NUM,
+                        nvl(u.USER_NICK,'noname') as user_nick,
+                        u.USER_PROFILE_PIC,
+                        b.TRIP_BOARD_TITLE,
+                        b.TRIP_BOARD_COUNTENT,
+                        b.TRIP_BOARD_START,
+                        b.TRIP_BOARD_END,
+                        b.TRIP_BOARD_TOGETHER,
+                        b.TRIP_BOARD_READCOUNT,
+                        b.TRIP_BOARD_ST
+                        from trip_board_tb b join user_tb u
+                        on b.user_num  = u.user_num
+                        where 1 = 0
+                        <if test="title!=null">
+                        	or b.TRIP_BOARD_TITLE like ('%${title}%')
+                        </if>
+                        <if test="tripStart!=null">
+                        	or b.TRIP_BOARD_START = to_date(#{tripStart},'yyyy/MM/dd')
+                        </if>
+                        <if test="tripEnd!=null">
+                        	or b.TRIP_BOARD_END =  to_date(#{tripEnd},'yyyy/MM/dd')
+                        </if>
+                         <if test="userNick!=null">
+                        	or u.user_nick like ('%${userNick}%')
+                        </if>
+                        <if test="type==0">
+                        	or 1 = 1
+                        </if>
+                        order by b.TRIP_BOARD_KEY desc ))
+where r between #{start} and #{end} 
 
 
 
 </select>
 
-<select id="getTotalCount" resultType="tripBoard">
+<select id="getTotalCount" parameterType="map" resultType="int">
 
 select count(*)
 from TRIP_BOARD_TB
+where 1 = 0
+<if test="title!=null">
+   or TRIP_BOARD_TITLE like ('%${title}%')
+</if>
+<if test="tripStart!=null">
+or TRIP_BOARD_START = to_date(#{tripStart},'yyyy/MM/dd')
+</if>
+<if test="tripEnd!=null">
+ or TRIP_BOARD_END =  to_date(#{tripEnd},'yyyy/MM/dd')
+</if>
+<if test="userNick!=null">
+  or user_nick like ('%${userNick}%')
+</if>
+<if test="type==0">
+   or 1 = 1
+</if>
 
 </select>
 
@@ -125,7 +179,10 @@ values(TRIP_REL_TB_SEQ.nextval,#{trip_Board_Key},#{trip_City_Key},#{user_Num})
 </insert>
 
 
-
+<select id="getListlatlng" resultType="map">
+select trip_city_lat,trip_city_lng 
+from trip_city_tb
+</select>
 
 
 

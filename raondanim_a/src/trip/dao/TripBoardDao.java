@@ -15,8 +15,8 @@ public interface TripBoardDao {
 	public TripBoard selectOneByUserNum(int userNum);
 	public List<TripBoard> selectAll();	
 	//페이징관련 메소드
-	public List<TripBoard> getTenBoardPage(Map<String, Object> params);
-	public int getTotalCount();
+	public List<Map<String, Object>> getTenBoardPage(Map<String, Object> params);
+	public int getTotalCount(Map<String, Object> params);
 
 
 	/////////////////////////////////////////////
@@ -24,7 +24,8 @@ public interface TripBoardDao {
 	public int insertCity(TripCity tripCity);
 	public TripCity selectOneByCity(Map<String, Object> params);
 	public List<TripCity> selectAllByCity();
-	
+	//게시판 리스트 띄울때 맵에 마커찍을  위도경도가지는 메소드
+	public List<Map<String, Object>> getListlatlng();
 	
 	
 	

@@ -145,9 +145,7 @@ html, body {
 				placeId : placeId
 			};
 		cityNames.push(cities);
-		
-// 		cityNames.push(cityName);
-// 		cities.push(new City(cityNames,locations));
+
 		alert(cityName+" 선택되었습니다.");
 		
 		
@@ -178,6 +176,7 @@ html, body {
 			center : uluru
 		});
 		
+
 		var markers = locations.map(function(location, i) {
 			return new google.maps.Marker({
 				position : location,
@@ -185,13 +184,33 @@ html, body {
 				animation : google.maps.Animation.DROP
 			});
 		});
+
+	
 		var markerCluster = new MarkerClusterer(
 				map,
 				markers,
 				{
 					imagePath : 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 				});
+		
+		
+/* 	정보창좀 띄우려고 별짓 다햇는데 못해먹겠음
 
+		markers.info = new google.maps.InfoWindow({
+               content: cityName
+               });
+
+
+        google.maps.event.addListener(markers, 'click', function() {  
+      
+             var marker_map = this.getMap();
+             this.info.open(marker_map, this);
+           
+        }); */
+	
+
+				
+		
 		var flightPath = new google.maps.Polyline({
 			path : locations,
 			geodesic : true,
@@ -202,6 +221,8 @@ html, body {
 
 		flightPath.setMap(map);
 
+
+		
 	}
 
 	function initMap2() {

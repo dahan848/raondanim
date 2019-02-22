@@ -24,6 +24,7 @@ public class TripBoard {
 	int trip_Board_Together;
 	int trip_Board_Readcount;
 	int trip_Board_St;
+	
 	public int getTrip_Board_Key() {
 		return trip_Board_Key;
 	}
