@@ -6,16 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>회원검색</title>
-<!-- CSS START -->
-<link rel="stylesheet" href="${contextPath}/css/commonness.css" />
-<link rel="stylesheet" href="${contextPath}/css/bootstrap-social.css" />
-<link rel="stylesheet" href="${contextPath}/css/font-awesome.css" />
-<!-- CSS END -->
-<script src="${contextPath}/js/search-detail.js"></script>
+<link rel="stylesheet" href="${contextPath}/css/fastselect.min.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/navbar-main.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/navbar-sub.jsp"></jsp:include>
+	<script src="${contextPath}/js/fastselect.standalone.js"></script>
 	<div class="main-container">
 		<section id="section-profile-list">
 			<div class="container">
@@ -64,19 +60,28 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="id_city">거주 도시</label>
 												<div class="col-sm-9">
-													
+													<input type="text" multiple class="multipleInputDynamic" data-url="${contextPath}/json/city.json" name="city"/>
+													<script>
+														$('.multipleInputDynamic').fastselect();
+													</script>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="id_languages">사용 언어</label>
 												<div class="col-sm-9">
-												
+													<input type="text" multiple class="multipleInputDynamic" data-load-once="true" data-url="${contextPath}/json/language.json" name="language"/>
+													<script>
+														$('.multipleInputDynamic').fastselect();
+													</script>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="id_tour_styles">여행 스타일</label>
 												<div class="col-sm-9">
-													 
+													<input type="text" multiple class="multipleInputDynamic" data-url="${contextPath}/json/tourstyles.json" name="language"/>
+													<script>
+														$('.multipleInputDynamic').fastselect();
+													</script>
 												</div>
 											</div>
 										</div>
@@ -90,7 +95,10 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="id_gender">성별</label>
 												<div class="col-sm-9">
-													 
+													 <input type="text" multiple class="multipleInputDynamic" data-url="${contextPath}/json/gender.json"name="gender"/>
+													 <script>
+														 $('.multipleInputDynamic').fastselect();
+													 </script>
 												</div>
 											</div>
 											<div class="form-group">
@@ -102,7 +110,10 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="id_interests">관심</label>
 												<div class="col-sm-9">
-													 
+													 <input type="text" multiple class="multipleInputDynamic" data-url="${contextPath}/json/interest.json" name="interest"/>
+													 <script>
+														 $('.multipleInputDynamic').fastselect();
+													 </script>
 												</div>
 											</div>
 										</div>
@@ -121,5 +132,6 @@
 			</div>
 		</section>
 	</div>
+	<script src="${contextPath}/js/search-detail.js"></script>
 </body>
 </html>

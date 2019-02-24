@@ -17,6 +17,7 @@
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**" />
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**" />
 	<mvc:resources location="/WEB-INF/resources/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/WEB-INF/resources/json/" mapping="/json/**" />
 
 	<!-- 기존 뷰리졸버 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
