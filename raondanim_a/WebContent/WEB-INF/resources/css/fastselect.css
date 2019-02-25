@@ -34,6 +34,7 @@ General styling
     transform: translate3d(0, 0, 0); } }
 
 .fstElement {
+  width: 100%;
   display: inline-block;
   position: relative;
   border: 1px solid #D7D7D7;
@@ -47,12 +48,13 @@ General styling
     left: -999em; }
 
 .fstToggleBtn {
-  font-size: 1.4em;
+  width: 100%;
+  font-size: 0.8em;
+  color: #999;
   display: block;
   position: relative;
   box-sizing: border-box;
   padding: 0.71429em 1.42857em 0.71429em 0.71429em;
-  min-width: 14.28571em;
   cursor: pointer; }
   .fstToggleBtn:after {
     position: absolute;
@@ -89,7 +91,7 @@ General styling
   display: none; }
 
 .fstResultItem {
-  font-size: 1.4em;
+  font-size: 0.8em;
   display: block;
   padding: 0.5em 0.71429em;
   margin: 0;
@@ -139,7 +141,7 @@ Single Mode
   display: none; }
 
 .fstSingleMode .fstQueryInput {
-  font-size: 1.4em;
+  font-size: 0.8em;
   display: block;
   width: 100%;
   padding: 0.5em 0.35714em;
@@ -164,7 +166,7 @@ Multiple mode
 ----------------------------------------------------------------------------------------------------*/
 .fstChoiceItem {
   display: inline-block;
-  font-size: 1.2em;
+  font-size: 0.8em;
   position: relative;
   margin: 0 0.41667em 0.41667em 0;
   padding: 0.33333em 0.33333em 0.33333em 1.5em;
@@ -207,11 +209,11 @@ Multiple mode
   box-sizing: border-box;
   padding: 0.5em 0.5em 0em 0.5em;
   overflow: hidden;
-  width: 20em;
+  width: auto;
   cursor: text; }
 
 .fstMultipleMode .fstQueryInput {
-  font-size: 1.4em;
+  font-size: 0.8em;
   float: left;
   padding: 0.28571em 0;
   margin: 0 0 0.35714em 0;

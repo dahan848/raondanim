@@ -18,6 +18,8 @@
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**" />
 	<mvc:resources location="/WEB-INF/resources/fonts/" mapping="/fonts/**" />
 	<mvc:resources location="/WEB-INF/resources/json/" mapping="/json/**" />
+	<mvc:resources location="/WEB-INF/resources/jsi18n/" mapping="/jsi18n/**" />
+	<mvc:resources location="/WEB-INF/resources/select2/" mapping="/select2/**" />
 
 	<!-- 기존 뷰리졸버 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
