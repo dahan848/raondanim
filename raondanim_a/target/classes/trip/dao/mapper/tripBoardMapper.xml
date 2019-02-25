@@ -28,7 +28,15 @@ values(#{trip_Board_Key},
 
 <select id="selectOneByBoardKey" parameterType="int" resultType="tripBoard">
 
-selcect *
+select  TRIP_BOARD_KEY,
+		USER_NUM,
+	 	TRIP_BOARD_TITLE,
+	  	TRIP_BOARD_COUNTENT,
+	    TRIP_BOARD_START,
+	    TRIP_BOARD_END,
+	    TRIP_BOARD_TOGETHER,
+	    TRIP_BOARD_READCOUNT,
+	    TRIP_BOARD_ST
 from TRIP_BOARD_TB
 where TRIP_BOARD_KEY = #{trip_Board_Key}
 
@@ -36,7 +44,15 @@ where TRIP_BOARD_KEY = #{trip_Board_Key}
 
 <select id="selectOneByUserNum" parameterType="int" resultType="tripBoard">
 
-select * 
+select  TRIP_BOARD_KEY,
+		USER_NUM,
+	 	TRIP_BOARD_TITLE,
+	  	TRIP_BOARD_COUNTENT,
+	    TRIP_BOARD_START,
+	    TRIP_BOARD_END,
+	    TRIP_BOARD_TOGETHER,
+	    TRIP_BOARD_READCOUNT,
+	    TRIP_BOARD_ST
 from TRIP_BOARD_TB
 where USER_NUM = #{num}
 
@@ -44,12 +60,19 @@ where USER_NUM = #{num}
 
 <select id="selectAll" resultType="tripBoard">
 
-select * 
+select  TRIP_BOARD_KEY,USER_NUM,
+	 	TRIP_BOARD_TITLE,
+	  	TRIP_BOARD_COUNTENT,
+	    TRIP_BOARD_START,
+	    TRIP_BOARD_END,
+	    TRIP_BOARD_TOGETHER,
+	    TRIP_BOARD_READCOUNT,
+	    TRIP_BOARD_ST
 from TRIP_BOARD_TB
 
 </select>
 
-
+<!-- 페이징쿼리 -->
 <select id="getTenBoardPage" parameterType="map" resultType="map">
 <!--관심사 희망 여행도시는 못뽑음 테이블 안만듬  -->
 select *
@@ -180,10 +203,49 @@ values(TRIP_REL_TB_SEQ.nextval,#{trip_Board_Key},#{trip_City_Key},#{user_Num})
 
 
 <select id="getListlatlng" resultType="map">
-select trip_city_lat,trip_city_lng 
+select trip_city_lat,trip_city_lng
 from trip_city_tb
 </select>
 
+<!-- 게시판상세화면용 쿼리 -->
+<select id="getTripBoardOneInfo" parameterType="map" resultType="map">
+<!-- 게시판 상세화면용 게시판,유저 정보 뽑는거 인데 유저 키나 게시판 키가 없으면 아무것도 조회 안되는게 맞는듯-->
+SELECT  B.TRIP_BOARD_KEY,
+        U.USER_NUM,
+        U.USER_ID,
+        U.USER_PW,
+        NVL(U.USER_NICK,'NO NAME') AS USER_NICK,
+        B.TRIP_BOARD_TITLE,
+        B.TRIP_BOARD_COUNTENT,
+        B.TRIP_BOARD_START,
+        B.TRIP_BOARD_END,
+        B.TRIP_BOARD_TOGETHER,
+        B.TRIP_BOARD_READCOUNT,
+        B.TRIP_BOARD_ST
+FROM TRIP_REL_TB R JOIN TRIP_BOARD_TB B
+ON R.TRIP_BOARD_KEY = B.TRIP_BOARD_KEY
+JOIN TRIP_CITY_TB C
+ON R.TRIP_CITY_KEY = C.TRIP_CITY_KEY
+JOIN USER_TB U
+ON R.USER_NUM = U.USER_NUM
+WHERE 1=0
+<if test="userNum!=null">
+or  U.USER_NUM = #{userNum}
+</if>
+<if test="boardKey!=null">
+or  B.TRIP_BOARD_KEY = #{boardKey}
+</if>
 
+</select>
+<select id="getTripBoardCityOneInfo" parameterType="int" resultType="map">
+SELECT  C.TRIP_CITY_KEY,
+		R.TRIP_BOARD_KEY,
+		C.TRIP_CITY_TOWN,
+		C.TRIP_CITY_LAT,
+		C.TRIP_CITY_LNG
+FROM TRIP_REL_TB R JOIN TRIP_CITY_TB C
+ON R.TRIP_CITY_KEY =C.TRIP_CITY_KEY
+WHERE R.TRIP_BOARD_KEY = #{num}
+</select>
 
 </mapper>

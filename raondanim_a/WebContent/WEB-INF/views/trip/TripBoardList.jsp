@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 
-	var locations = [];
+	var locations = ${tripLatLng};
 
 	function initMap() {
 		// 검색한 지도
@@ -70,18 +70,9 @@
 		
 	}
 	window.onload = function() {
-		var loc = "${tripLatLng}";
-		alert(loc);
- 		/* for(var i in loc){
-			var location = {
- 				lat: loc[i].lat,
- 				lng: loc[i].lng
- 			};
- 			locations.push(latlng);
-			alert(locations[i].lat+""+locations[i].lng);
- 		} */
+	
 		
-		//initMap();
+		initMap();
 		
 	}
 </script>
@@ -113,7 +104,7 @@
 
 		<div class="container" id="con2">
 		
-			<h1>동행친구 리스트</h1>
+			<h1><small><b>여행자들이 선택한 나라들</b></small></h1>
 
 			<!--맵자리 시작  -->
 			<div style="height: 500px; border: 1px solid black;" id="map"></div>
@@ -134,9 +125,9 @@
 							<option value="4">여행자</option>
 						</select>
 
-						<div class="form-group">
+						<div class="form-group" st>
 							<input type="text" class="form-control" id="keyword"
-								placeholder="검색어를 입력하세요" name="keyword" style="width: 500px;">
+								placeholder="검색어를 입력하세요" name="keyword" style="width: 700px;">
 						</div>
 
 						<button type="submit" class="btn btn-default">검색</button>
@@ -181,7 +172,9 @@
 									<img alt="" src="${contextPath}/img/Profile.png">
 								</c:if></td>
 							<td>${list.USER_NICK}</td>
-							<td>${list.TRIP_BOARD_TITLE}</td>
+							<td>
+								<a href="view?boardKey=${list.TRIP_BOARD_KEY}&userNum=${list.USER_NUM}">${list.TRIP_BOARD_TITLE}</a>
+							</td>
 
 
 

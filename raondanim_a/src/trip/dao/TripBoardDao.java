@@ -17,8 +17,6 @@ public interface TripBoardDao {
 	//페이징관련 메소드
 	public List<Map<String, Object>> getTenBoardPage(Map<String, Object> params);
 	public int getTotalCount(Map<String, Object> params);
-
-
 	/////////////////////////////////////////////
 	//도시테이블 메소드
 	public int insertCity(TripCity tripCity);
@@ -26,13 +24,13 @@ public interface TripBoardDao {
 	public List<TripCity> selectAllByCity();
 	//게시판 리스트 띄울때 맵에 마커찍을  위도경도가지는 메소드
 	public List<Map<String, Object>> getListlatlng();
-	
-	
-	
+
 	////////////////////////////////////////////
 	//관계테이블 메소드
 	public int insertRel(TripRel tripRel);
 	//관계 테이블 낀 조회 메소드는 테스트 데이터 집어놓고 나서 
 	
-	
+	//게시판상세 화면용 메소드
+	public Map<String, Object> getTripBoardOneInfo(Map<String, Object> params);
+	public List<Map<String, Object>> getTripBoardCityOneInfo(int boardKey);
 }

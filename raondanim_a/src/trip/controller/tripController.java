@@ -51,20 +51,38 @@ public class tripController {
 		//System.out.println("list요청  tripdata 검사:"+tripData);
 		model.addAttribute("tripData", tripData);
 		//지도 찍을 위도경도인데 컬럼이 구글에서 받는 형식과 다르고 자바 객체형태는 = 으로 되있다 보니까 json으로 일단 변환시켜서 보내봄
-		JSONArray tripLatLng = new JSONArray(tripService.getListlatlng());
+//		JSONArray tripLatLng = new JSONArray(tripService.getListlatlng());
 		
-/*		Gson gson = new Gson();
+		//list<map> 구조를 jsonarr 로 변경하는건 안되는데 list<map>을 json객체로 바꿔서 보내니까 됨 뭔차이가 
+		Gson gson = new Gson();
 		String tripLatLng = gson.toJson(tripService.getListlatlng());
-		System.out.println("위도경도 확인용 list->json : "+tripLatLng);*/
-		model.addAttribute("tripLatLng", tripService.getListlatlng());
-		System.out.println(tripService.getListlatlng());
+
+		model.addAttribute("tripLatLng", tripLatLng);
+		//System.out.println(tripLatLng);
 		
 		return "trip/TripBoardList";
 	}
 
 	@RequestMapping("/view")
-	public String boardView() {
-		System.out.println("요청받음");
+	public String boardView(@RequestParam(required=false) int boardKey,@RequestParam(required=false) int userNum, Model model) {
+		System.out.println(" view 요청받음");
+		 
+		Map<String, Object> params = new HashMap<>();
+		//게시판 정보 불러오는데 보드키나 유저키가 없으면 아무것도 안불러오기 떄문에 암것도없으면 리스트로 리다이렉트
+		if(boardKey==0) {
+			params.put("boardKey", boardKey);
+		}else if(userNum==0) {
+			params.put("userNum", userNum);
+		}else {
+			return "redirect:list";
+		}
+		
+		
+		model.addAttribute("boardInfo", tripService.getTripBoardOneInfo(params));
+		model.addAttribute("cityInfo", tripService.getTripBoardCityOneInfo(boardKey));
+		System.out.println("뷰 요청 테스트 게시판 정보: "+tripService.getTripBoardOneInfo(params));
+		System.out.println("뷰 요청 테스트 도시 정보: "+tripService.getTripBoardCityOneInfo(boardKey));
+		
 		return "trip/TripBoardView";
 	}
 
@@ -78,7 +96,7 @@ public class tripController {
 	@RequestMapping("/write2")
 	public String boardWrite2(TripBoard tripBoard, Model model) {
 		System.out.println("write2요청받음");
-		System.out.println(tripBoard);
+		//System.out.println(tripBoard);
 		model.addAttribute("tripBoard", tripBoard);
 		return "trip/TripBoardWriteForm2";
 	}
@@ -100,4 +118,11 @@ public class tripController {
 		
 	}
 
+
+	
+
+	
+	
+	
 }
+

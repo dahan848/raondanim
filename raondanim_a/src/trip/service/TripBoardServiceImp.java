@@ -211,7 +211,7 @@ public class TripBoardServiceImp implements TripBoardService {
 		// 그러니 "" 남아있는거같음
 		JsonParser parser = new JsonParser();
 		JsonArray jsonArray = (JsonArray) parser.parse(tripCity);
-		System.out.println("서비스 jsonarr확인 :" + jsonArray);
+		//System.out.println("서비스 jsonarr확인 :" + jsonArray);
 
 		/*
 		 * for (int i = 0; i < jsonArray.size(); i++) { JsonObject object = (JsonObject)
@@ -236,8 +236,8 @@ public class TripBoardServiceImp implements TripBoardService {
 			int boardKey = tripBoard.getTrip_Board_Key();
 			int userKey = tripBoard.getUser_Num();
 
-			System.out.println("서비스 셀렉트 키 확인용 :" + boardKey);
-			System.out.println("서비스 셀렉트 키 확인용 :" + userKey);
+			//System.out.println("서비스 셀렉트 키 확인용 :" + boardKey);
+			//System.out.println("서비스 셀렉트 키 확인용 :" + userKey);
 			// 키값 제대로 가져왔음 여까진 넘어옴
 
 			// city insert
@@ -274,6 +274,33 @@ public class TripBoardServiceImp implements TripBoardService {
 			return false;
 		}
 
+	}
+//게시판 상세화면용 메소드
+	@Override
+	public Map<String, Object> getTripBoardOneInfo(Map<String, Object> params) {
+		//게시판 상세화면용 유저 정보 , 게시판 정보 가지고있음
+		return tripDao.getTripBoardOneInfo(params);
+	}
+
+	@Override
+	public String getTripBoardCityOneInfo(int boardKey) {
+		// 게시판에 속한 도시 정보 몇개일지 알수없기 때문에 따로 분리함
+		//리스트 가져와서 링크드 해시맵으로 필요한것만 빼서 순서 맞춘뒤 json으로 변환후 반환
+		List<Map<String, Object>> temp = tripDao.getTripBoardCityOneInfo(boardKey);
+		
+		List<Map<String, Object>> cityList = new ArrayList<>();
+		
+		for(Map<String, Object> t:temp) {
+			Map<String, Object> ci = new LinkedHashMap<>();
+			ci.put("cityName", t.get("TRIP_CITY_TOWN"));
+			ci.put("lat", t.get("TRIP_CITY_LAT"));
+			ci.put("lng", t.get("TRIP_CITY_LNG"));
+			cityList.add(ci);
+		}
+		Gson gson = new Gson();
+		String cityInfo = gson.toJson(cityList);
+		
+		return cityInfo;
 	}
 
 

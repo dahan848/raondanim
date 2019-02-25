@@ -35,6 +35,10 @@ public interface TripBoardService {
 	//기존 글쓰기 폐기 트랜잭션 이용 통합 글쓰기 
 	public boolean totalWrite(TripBoard tripBoard, String tripCity);
 	
-	
+	//게시판 상세화면용 메소드
+	//게시판 상세화면용 유저 정보 , 게시판 정보 가지고있음 파라메터로 컨트롤러에서 보드키인지 유저키인지 정해서 넣어주는걸로
+	public Map<String, Object> getTripBoardOneInfo(Map<String, Object> params);
+	//링크드해시맵으로 순서 맞춰서 json으로 변경후 보내야함
+	public String getTripBoardCityOneInfo(int boardKey);
 	
 }
