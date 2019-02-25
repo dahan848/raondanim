@@ -17,7 +17,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 #con {
-	height: 1500px;
+	min-height: 1300px;
+	max-height: 1300px;
+	overflow: hidden;
 }
 
 #con1 {
@@ -42,7 +44,7 @@
 
 	function initMap() {
 		// 검색한 지도
-		var labels = '123456789';
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 		var uluru = {
 			lat : 37.566535,
@@ -104,7 +106,7 @@
 
 		<div class="container" id="con2">
 		
-			<h1><small><b>여행자들이 선택한 나라들</b></small></h1>
+			<h1><small><b>여행자들이 선택한 여행지들</b></small></h1>
 
 			<!--맵자리 시작  -->
 			<div style="height: 500px; border: 1px solid black;" id="map"></div>
@@ -151,7 +153,7 @@
 								<b>여행기간</b>
 							</h5></th>
 						<th><h5>
-								<b>관심사</b>
+								<b>여행지</b>
 							</h5></th>
 						<th><h5>
 								<b>여행스타일</b>

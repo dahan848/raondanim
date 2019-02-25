@@ -31,6 +31,6 @@ public interface TripBoardDao {
 	//관계 테이블 낀 조회 메소드는 테스트 데이터 집어놓고 나서 
 	
 	//게시판상세 화면용 메소드
-	public Map<String, Object> getTripBoardOneInfo(Map<String, Object> params);
+	public Map<String, Object> getTripBoardOneInfo(int boardKey);
 	public List<Map<String, Object>> getTripBoardCityOneInfo(int boardKey);
 }

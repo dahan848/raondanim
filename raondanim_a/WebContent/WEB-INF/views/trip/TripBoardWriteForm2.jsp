@@ -30,13 +30,21 @@
 }
 
 #ee {
-	height: 750px;
-	border: 1px dotted;
+	min-height:760px;
+	max-height:760px;
+	border-top: 1px dotted;
+	border-left: 1px dotted;
+	border-bottom: 1px dotted;
+	overflow: auto;
 }
 
 #ff {
-	height: 750px;
-	border: 1px dotted;
+	min-height:760px;
+	max-height:760px;
+	border-top: 1px dotted;
+	border-left: 1px dotted;
+	border-bottom: 1px dotted;
+	overflow: auto;
 }
 
 /* 콜렙스 css  */
@@ -146,8 +154,11 @@ html, body {
 			};
 		cityNames.push(cities);
 
-		alert(cityName+" 선택되었습니다.");
-		
+		//alert(cityName+" 선택되었습니다.");
+		swal({
+			text:cityName+" 선택되었습니다.",
+			icon:"success",		
+		});
 		
 		//맵그려지고 리스트 그려지는 부분
 		var map1 = document.getElementById("map1");
@@ -248,7 +259,7 @@ html, body {
 		ff.html("");
 		for(var i in cityNames){
 		
-			var row = $("<div class='row' style='border: 1px dotted grey;' >");	
+			var row = $("<div class='row' style='border: 2px solid #a0c4ff;' >");	
 			var col = $("<div class='col-sm-12'>");
 			var table = $("<table class='table'>");
 			var tr = $("<tr>");
@@ -348,7 +359,8 @@ html, body {
 
 
 				</div>
-				<div class="row">
+				
+				<div class="row" style="height: 100%;">
 					<div class="col-lg-4" id="ee">
 						<div class="row">
 							<div class="col-sm-12">
@@ -394,7 +406,7 @@ html, body {
 						<div class="row">
 							<div class="col-sm-12">
 								
-									<form action="write3" id="sendWrite">
+								<form action="write3" id="sendWrite">
 									<input type="hidden" id="boardWrite1" value="${tripBoard.user_Num}" name="user_Num">
 									<input type="hidden" id="boardWrite1" value="${tripBoard.trip_Board_Title}" name="trip_Board_Title">
 									<input type="hidden" id="boardWrite1" value="${tripBoard.trip_Board_Start}" name="trip_Board_Start">

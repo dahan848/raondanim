@@ -64,23 +64,13 @@ public class tripController {
 	}
 
 	@RequestMapping("/view")
-	public String boardView(@RequestParam(required=false) int boardKey,@RequestParam(required=false) int userNum, Model model) {
+	public String boardView(@RequestParam(required=false) int boardKey, Model model) {
 		System.out.println(" view 요청받음");
-		 
-		Map<String, Object> params = new HashMap<>();
-		//게시판 정보 불러오는데 보드키나 유저키가 없으면 아무것도 안불러오기 떄문에 암것도없으면 리스트로 리다이렉트
-		if(boardKey==0) {
-			params.put("boardKey", boardKey);
-		}else if(userNum==0) {
-			params.put("userNum", userNum);
-		}else {
-			return "redirect:list";
-		}
+
 		
-		
-		model.addAttribute("boardInfo", tripService.getTripBoardOneInfo(params));
+		model.addAttribute("boardInfo", tripService.getTripBoardOneInfo(boardKey));
 		model.addAttribute("cityInfo", tripService.getTripBoardCityOneInfo(boardKey));
-		System.out.println("뷰 요청 테스트 게시판 정보: "+tripService.getTripBoardOneInfo(params));
+		System.out.println("뷰 요청 테스트 게시판 정보: "+tripService.getTripBoardOneInfo(boardKey));
 		System.out.println("뷰 요청 테스트 도시 정보: "+tripService.getTripBoardCityOneInfo(boardKey));
 		
 		return "trip/TripBoardView";

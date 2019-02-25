@@ -277,25 +277,26 @@ public class TripBoardServiceImp implements TripBoardService {
 	}
 //게시판 상세화면용 메소드
 	@Override
-	public Map<String, Object> getTripBoardOneInfo(Map<String, Object> params) {
+	public Map<String, Object> getTripBoardOneInfo(int boardKey) {
 		//게시판 상세화면용 유저 정보 , 게시판 정보 가지고있음
-		return tripDao.getTripBoardOneInfo(params);
+		//리스트 가져와서 링크드 해시맵으로 필요한것만 빼서 순서 맞춘뒤 json으로 변환후 반환
+		return tripDao.getTripBoardOneInfo(boardKey);
 	}
 
 	@Override
 	public String getTripBoardCityOneInfo(int boardKey) {
 		// 게시판에 속한 도시 정보 몇개일지 알수없기 때문에 따로 분리함
-		//리스트 가져와서 링크드 해시맵으로 필요한것만 빼서 순서 맞춘뒤 json으로 변환후 반환
+	
 		List<Map<String, Object>> temp = tripDao.getTripBoardCityOneInfo(boardKey);
 		
 		List<Map<String, Object>> cityList = new ArrayList<>();
 		
 		for(Map<String, Object> t:temp) {
-			Map<String, Object> ci = new LinkedHashMap<>();
-			ci.put("cityName", t.get("TRIP_CITY_TOWN"));
-			ci.put("lat", t.get("TRIP_CITY_LAT"));
-			ci.put("lng", t.get("TRIP_CITY_LNG"));
-			cityList.add(ci);
+			Map<String, Object> city = new LinkedHashMap<>();
+			city.put("cityName", t.get("TRIP_CITY_TOWN"));
+			city.put("lat", t.get("TRIP_CITY_LAT"));
+			city.put("lng", t.get("TRIP_CITY_LNG"));
+			cityList.add(city);
 		}
 		Gson gson = new Gson();
 		String cityInfo = gson.toJson(cityList);

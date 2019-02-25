@@ -208,7 +208,7 @@ from trip_city_tb
 </select>
 
 <!-- 게시판상세화면용 쿼리 -->
-<select id="getTripBoardOneInfo" parameterType="map" resultType="map">
+<select id="getTripBoardOneInfo" parameterType="int" resultType="map">
 <!-- 게시판 상세화면용 게시판,유저 정보 뽑는거 인데 유저 키나 게시판 키가 없으면 아무것도 조회 안되는게 맞는듯-->
 SELECT  B.TRIP_BOARD_KEY,
         U.USER_NUM,
@@ -222,19 +222,9 @@ SELECT  B.TRIP_BOARD_KEY,
         B.TRIP_BOARD_TOGETHER,
         B.TRIP_BOARD_READCOUNT,
         B.TRIP_BOARD_ST
-FROM TRIP_REL_TB R JOIN TRIP_BOARD_TB B
-ON R.TRIP_BOARD_KEY = B.TRIP_BOARD_KEY
-JOIN TRIP_CITY_TB C
-ON R.TRIP_CITY_KEY = C.TRIP_CITY_KEY
-JOIN USER_TB U
-ON R.USER_NUM = U.USER_NUM
-WHERE 1=0
-<if test="userNum!=null">
-or  U.USER_NUM = #{userNum}
-</if>
-<if test="boardKey!=null">
-or  B.TRIP_BOARD_KEY = #{boardKey}
-</if>
+FROM TRIP_BOARD_TB B JOIN USER_TB U
+ON B.USER_NUM =U.USER_NUM
+WHERE B.TRIP_BOARD_KEY = #{num}
 
 </select>
 <select id="getTripBoardCityOneInfo" parameterType="int" resultType="map">
