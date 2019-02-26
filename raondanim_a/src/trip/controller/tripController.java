@@ -70,8 +70,10 @@ public class tripController {
 		
 		model.addAttribute("boardInfo", tripService.getTripBoardOneInfo(boardKey));
 		model.addAttribute("cityInfo", tripService.getTripBoardCityOneInfo(boardKey));
+		model.addAttribute("cityTable", tripService.getTripBoardCityTableList(boardKey));
 		System.out.println("뷰 요청 테스트 게시판 정보: "+tripService.getTripBoardOneInfo(boardKey));
 		System.out.println("뷰 요청 테스트 도시 정보: "+tripService.getTripBoardCityOneInfo(boardKey));
+		System.out.println("뷰 요청 테스트 도시테이블 그리기 용 정보: "+tripService.getTripBoardCityTableList(boardKey));
 		
 		return "trip/TripBoardView";
 	}

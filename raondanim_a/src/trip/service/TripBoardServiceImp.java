@@ -293,15 +293,21 @@ public class TripBoardServiceImp implements TripBoardService {
 		
 		for(Map<String, Object> t:temp) {
 			Map<String, Object> city = new LinkedHashMap<>();
-			city.put("cityName", t.get("TRIP_CITY_TOWN"));
-			city.put("lat", t.get("TRIP_CITY_LAT"));
-			city.put("lng", t.get("TRIP_CITY_LNG"));
+			city.put("cityName",  t.get("TRIP_CITY_TOWN"));
+			city.put("lat", Float.parseFloat((String) t.get("TRIP_CITY_LAT")));
+			city.put("lng", Float.parseFloat((String) t.get("TRIP_CITY_LNG")));
 			cityList.add(city);
 		}
 		Gson gson = new Gson();
 		String cityInfo = gson.toJson(cityList);
 		
 		return cityInfo;
+	}
+
+	@Override
+	public List<Map<String, Object>> getTripBoardCityTableList(int boardKey) {
+		
+		return tripDao.getTripBoardCityOneInfo(boardKey);
 	}
 
 

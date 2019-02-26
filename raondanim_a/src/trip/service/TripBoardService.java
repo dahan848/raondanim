@@ -38,7 +38,9 @@ public interface TripBoardService {
 	//게시판 상세화면용 메소드
 	//게시판 상세화면용 유저 정보 , 게시판 정보 가지고있음 파라메터로 컨트롤러에서 보드키인지 유저키인지 정해서 넣어주는걸로
 	public Map<String, Object> getTripBoardOneInfo(int boardKey);
-	//링크드해시맵으로 순서 맞춰서 json으로 변경후 보내야함
+	//링크드해시맵으로 순서 맞춰서 json으로 변경후 보내야함-맵에 마커찍는용
 	public String getTripBoardCityOneInfo(int boardKey);
+	public List<Map<String, Object>> getTripBoardCityTableList(int boardKey);
+	
 	
 }

@@ -16,11 +16,11 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
-var locations = [];
+var locations = ${cityInfo};
 
 function initMap() {
 	// 검색한 지도
-	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var labels = '123456789';
 
 	var uluru = {
 		lat : 37.566535,
@@ -46,8 +46,21 @@ function initMap() {
 				imagePath : 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 			});
 	
+	
+	var flightPath = new google.maps.Polyline({
+		path : locations,
+		geodesic : true,
+		strokeColor : '#4286f4',
+		strokeOpacity : 1.0,
+		strokeWeight : 2
+	});
+
+	flightPath.setMap(map);
+	
+	
 }
 
+//div 토글용 펑션
 function toggleDisplay() {
 	var leftDiv1 = $("#leftDiv-1");
 	var leftDiv2 = $("#leftDiv-2");
@@ -62,10 +75,37 @@ function toggleDisplay() {
 }
 
 
+function drawCityTable() {
+	var cityNames = "${cityTable}";
+	var leftDiv12 = $("#leftDiv-1-2");
+	var j = 1;
+	alert(cityNames);
+	for(var i in cityNames){
+		var col = $("<div class='col-sm-12'>");
+		var table = $("<table class='table'>");
+		var tr = $("<tr>");
+		var moveBtn = $("<input type='button' class='btn btn-primary btn-sm' value='>>' id='moveBtn' onclick=''>")
+		$("<th>").text(j+"번").appendTo(tr);
+		$("<th>").text(cityNames[i].TRIP_CITY_TOWN).appendTo(tr);
+		$("<th>").html(moveBtn).appendTo(tr);
+		$("<th>").html("<input type='hidden' value='"+cityNames[i].TRIP_CITY_LAT+"' class='btn btn-primary btn-sm' id='moveLat"+i+"'>").appendTo(tr);
+		$("<th>").html("<input type='hidden' value='"+cityNames[i].TRIP_CITY_LNG+"' class='btn btn-primary btn-sm' id='moveLng"+i+"'>").appendTo(tr);
+		tr.appendTo(table);
+		table.appendTo(col);
+		col.appendTo(leftDiv12);
+		j++;
+	}
+}
+
+
+
 window.onload = function() {
 
 	
 	initMap();
+	drawCityTable();
+
+	
 	
 }
 
@@ -83,6 +123,7 @@ window.onload = function() {
 	overflow: auto;
 	border-right: 1px dotted;
 	padding: 0px;
+	background-color: #eeeeee;
 }
 #leftDiv-1{
 	min-height: 1000px;
@@ -109,7 +150,7 @@ window.onload = function() {
 	width: 100%;
 	border: 1px solid purple;
 	margin:0px;
-	overflow: hidden;
+	overflow: auto;
 }
 #leftTable{
 	min-height: 200px;
@@ -123,28 +164,36 @@ window.onload = function() {
 	height:100%;
 	width: 50%;
 	border: 1px solid green;
+	padding: 0px;
 	overflow: auto;
 	display: none;
 }
+th{
+	padding: 0px;
+}
+/* #leftDiv-2-1{ */
+
+
+/* } */
 
 #rightDiv {
 	min-height: 1000px;
 	max-height: 1000px;
 	padding: 1px;
 }
-#rightRow1{
-	min-height: 800px;
-	max-height: 800px;
+/*#rightRow1{
+	min-height: 1000px;
+	max-height: 1000px;
 	width:100%;
 	margin: 0px;
 }
-#rightRow2{
+ #rightRow2{
 	min-height: 200px;
 	max-height: 200px;
 	width:100%;
 	border-top:1px dotted;
 	margin: 0px;
-}
+} */
 #boardContent{
 	min-height: 200px;
 	max-height: 200px;
@@ -158,7 +207,7 @@ window.onload = function() {
 }
 
 #map{
-	height:	800px;
+	height:	1000px;
 	width: 100%;
 
 }
@@ -190,10 +239,11 @@ window.onload = function() {
 				<div class="col-lg-6" id="leftDiv-1">
 				 	
 				 	<div class="row" id="leftDiv-1-1">
+
 				 		<table class="table" id="leftTable">
 				 			<tr>
 				 				<th colspan="4">
-				 					<span>${boardInfo.TRIP_BOARD_TITLE}</span>
+				 					<h4>${boardInfo.TRIP_BOARD_TITLE}</h4>
 				 				</th>
 				 			</tr>
 				 			<tr>
@@ -201,7 +251,7 @@ window.onload = function() {
 				 					<img src="${contextPath}/img/Profile.png" width="30px;" onclick="#" >
 				 					&nbsp;&nbsp;
 				 					<span>${boardInfo.USER_NICK}</span>
-				 					<button></button>
+				 					<button style="background-image:${contextPath}/img/Profile.png "></button>
 				 				</th>
 				 			</tr>
 				 			<tr>
@@ -217,28 +267,63 @@ window.onload = function() {
 				 	
 				 	</div>
 				 	<div class="row" id="leftDiv-1-2">
-				 			하단 도시 for문으로 테이블 그리기 
+				 	
+<%-- 				 		<c:forEach items="${cityTable}" var="list" varStatus="status"> --%>
+<!-- 				 			<div class="col-sm-12"> -->
+<!-- 								<table class="table"> -->
+<!-- 									<tr> -->
+<%-- 										<th>${status.count}번</th> --%>
+<%-- 										<th>${list.TRIP_CITY_TOWN}</th> --%>
+<!-- 										<th> -->
+<!-- 											<form action="#" id="moveMaker" method="post"> -->
+<%-- 												<input type="hidden" name="lat" value="${list.TRIP_CITY_LAT}"> --%>
+<%-- 												<input type="hidden" name="lng" value="${list.TRIP_CITY_LNG}"> --%>
+<!-- 												<input type="button" class="btn btn-primary btn-sm" value=">>" id="moveBtn" onclick=""> -->
+<!-- 											</form> -->
+<!-- 										</th> -->
+<!-- 									</tr> -->
+<!-- 								</table> -->
+<!-- 							</div> -->
+<%-- 				 		</c:forEach>	 --%>
+				 			
 				 	</div>
 				 	
 				</div>
 				
 				<!--중앙 div 콜렙스 될부분  -->
 				<div class="col-lg-6" id="leftDiv-2">
-				 	
+				 	<div class="container" id="leftDiv-2-1">
+				 		<table class="table">
+				 			<tr>
+				 				<th>
+				 					<h2><b><small><mark>여행소개</mark></small></b></h2>
+				 				</th>
+				 			</tr>
+				 			<tr>
+				 				<td style="font-size: 13pt;">
+				 					${boardInfo.TRIP_BOARD_COUNTENT}
+				 				</td>
+				 			</tr>
+				 		</table>
+	 		
+				 	</div>
 				</div>
 				
 			</div>
 			
 			<!--지도 들어갈 div  -->
 			<div class="col-lg-8" id="rightDiv">
-				<div class="row" id="rightRow1">
-					<div id="map">지도</div> 
+				<div id="map">지도</div> 
+			<%--	
+				우측 div를 상하단으로 8/2비뷸로 나눌때 
+			<div class="row" id="rightRow1">
+					
 				</div>
-				<div class="row" id="rightRow2">
+			 	<div class="row" id="rightRow2">
 					 <div id="boardContent">
 					 	<span id="boardContent-1">${boardInfo.TRIP_BOARD_COUNTENT}</span>		
 					 </div> 
-				</div>
+				</div> --%>
 			</div>
 		
 		
