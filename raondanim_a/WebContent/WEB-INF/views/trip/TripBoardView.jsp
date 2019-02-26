@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<% request.setAttribute("contextPath", request.getContextPath()); %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +53,12 @@ function toggleDisplay() {
 	var leftDiv2 = $("#leftDiv-2");
 	//var leftDiv2Attr = $("leftDiv-2").attr("display");
 	leftDiv2.toggle();
-	
+	//css속성이라 css로 했어야했는데 attr prop 쓰냐고 헷갈림
+	if(leftDiv2.css("display")=="none"){
+		leftDiv1.animate({width:"100%"},"swing")
+	}else if(leftDiv2.css("display")=="block"){
+		leftDiv1.animate({width:"50%"},"swing")
+	}
 }
 
 
@@ -81,10 +88,34 @@ window.onload = function() {
 	min-height: 1000px;
 	max-height: 1000px;
 	height:100%;
-	width: 50%;
-	border: 1px solid red;
-	overflow: auto;
-	display: inline-block;
+	width: 100%;
+	padding:0px;
+	margin:0px;
+	overflow: hidden;
+}
+#leftDiv-1-1{
+	min-height: 200px;
+	max-height: 200px;
+	height:20%;
+	width: 100%;
+	border: 1px solid blue;
+	margin:0px;
+	overflow: hidden;
+}
+#leftDiv-1-2{
+	min-height: 800px;
+	max-height: 800px;
+	height:800%;
+	width: 100%;
+	border: 1px solid purple;
+	margin:0px;
+	overflow: hidden;
+}
+#leftTable{
+	min-height: 200px;
+	max-height: 200px;
+	height: 100%;
+	overflow: hidden;
 }
 #leftDiv-2{
 	min-height: 1000px;
@@ -93,7 +124,7 @@ window.onload = function() {
 	width: 50%;
 	border: 1px solid green;
 	overflow: auto;
-	display: block;
+	display: none;
 }
 
 #rightDiv {
@@ -114,6 +145,18 @@ window.onload = function() {
 	border-top:1px dotted;
 	margin: 0px;
 }
+#boardContent{
+	min-height: 200px;
+	max-height: 200px;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	
+}
+#boardContent-1{
+	font-size: 12pt;
+}
+
 #map{
 	height:	800px;
 	width: 100%;
@@ -143,20 +186,58 @@ window.onload = function() {
 		<div class="row" id="mainRow">
 			<!--왼쪽 사이드 div  -->
 			<div class="col-lg-4" id="leftDiv">
+				
 				<div class="col-lg-6" id="leftDiv-1">
-				 	<input type="button" onclick="toggleDisplay()" value="토글">
+				 	
+				 	<div class="row" id="leftDiv-1-1">
+				 		<table class="table" id="leftTable">
+				 			<tr>
+				 				<th colspan="4">
+				 					<span>${boardInfo.TRIP_BOARD_TITLE}</span>
+				 				</th>
+				 			</tr>
+				 			<tr>
+				 				<th>
+				 					<img src="${contextPath}/img/Profile.png" width="30px;" onclick="#" >
+				 					&nbsp;&nbsp;
+				 					<span>${boardInfo.USER_NICK}</span>
+				 					<button></button>
+				 				</th>
+				 			</tr>
+				 			<tr>
+				 				<td><input type="button" onclick="toggleDisplay()" class="btn btn-primary btn-xs" value="동행신청">
+				 				<input type="button" onclick="toggleDisplay()" class="btn btn-primary btn-xs" value="신고">
+				 				<input type="button" onclick="toggleDisplay()" class="btn btn-primary btn-xs" value="수정">
+				 				<input type="button" onclick="toggleDisplay()" class="btn btn-primary btn-xs" value="삭제">
+				 				<input type="button" onclick="toggleDisplay()" class="btn btn-primary btn-xs" value="토글">
+				 				</td>
+				 			</tr>
+				 		</table>
+	
+				 	
+				 	</div>
+				 	<div class="row" id="leftDiv-1-2">
+				 			하단 도시 for문으로 테이블 그리기 
+				 	</div>
+				 	
 				</div>
+				
+				<!--중앙 div 콜렙스 될부분  -->
 				<div class="col-lg-6" id="leftDiv-2">
-				 2
+				 	
 				</div>
+				
 			</div>
+			
 			<!--지도 들어갈 div  -->
 			<div class="col-lg-8" id="rightDiv">
 				<div class="row" id="rightRow1">
 					<div id="map">지도</div> 
 				</div>
 				<div class="row" id="rightRow2">
-					 <div id="boardContent">내용11</div> 
+					 <div id="boardContent">
+					 	<span id="boardContent-1">${boardInfo.TRIP_BOARD_COUNTENT}</span>		
+					 </div> 
 				</div>
 			</div>
 		
